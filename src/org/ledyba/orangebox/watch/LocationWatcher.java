@@ -50,7 +50,7 @@ class LocationWatcher extends AbstractWatcher implements LocationListener {
 		final String fname = String.format(Locale.JAPANESE, "%s_%d.txt", "GPS", new Date().getTime());
 		return base + File.separator + fname;
 	}
-
+	
 	public void requestUpdate() {
 		Iterator<GpsSatellite> it = manager.getGpsStatus(null).getSatellites().iterator();
 		boolean hasGps = false;
