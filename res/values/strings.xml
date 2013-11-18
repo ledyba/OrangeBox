@@ -1,14 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Meso</string>
-    
-    <string name="battery_info">BatteryInfo</string>
-    <string name="level">Level</string>
-    <string name="health">Health</string>
-    <string name="status">Status</string>
-    <string name="voltage">Voltage</string>
-    <string name="temperature">Temp</string>
-    <string name="technology">Tech</string>
+    <string name="app_name">OrangeBox</string>
     
     <string name="Settings">Settings</string>
     <string name="EnableNotification">Enable notification</string>

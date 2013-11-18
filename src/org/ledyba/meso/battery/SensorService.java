@@ -32,8 +32,8 @@ public class SensorService extends Service {
 		private BufferedWriter bw;
 		private String getFilename(){
 			return
-					Environment.getExternalStorageDirectory().getPath()+File.separator+
-					String.format(Locale.JAPANESE, "%s_%d", sensor.getName(), new Date().getTime());
+			Environment.getExternalStorageDirectory().getPath()+File.separator+
+			String.format(Locale.JAPANESE, "%s_%d.txt", sensor.getName(), new Date().getTime());
 		}
 		public SensorWatcher(Context ctx, Sensor sensor) {
 			this.sensor = sensor;
@@ -102,6 +102,8 @@ public class SensorService extends Service {
 		final SensorManager manager = (SensorManager)getSystemService(SENSOR_SERVICE);
 		List<Sensor> accs = manager.getSensorList(Sensor.TYPE_LINEAR_ACCELERATION);
 		List<Sensor> gravs =  manager.getSensorList(Sensor.TYPE_GRAVITY);
+		Log.d(TAG, accs.size() +" Acceleration sensors found.");
+		Log.d(TAG, gravs.size()+" Gravity sensors found.");
 		for( Sensor sensor : accs ) {
 			SensorWatcher watcher = new SensorWatcher(this, sensor);
 			watchers.add(watcher);
@@ -110,13 +112,16 @@ public class SensorService extends Service {
 			SensorWatcher watcher = new SensorWatcher(this, sensor);
 			watchers.add(watcher);
 		}
+		int registered = 0;
 		for( SensorWatcher watcher : watchers ) {
 			try {
 				watcher.start();
+				++registered;
 			} catch (IOException e) {
 				throw new RuntimeException(e);
 			}
 		}
+		Log.d(TAG, registered + " of " + watchers.size() + " sensors registered");
 }
 
 	@Override

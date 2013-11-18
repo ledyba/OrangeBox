@@ -1,14 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Meso</string>
-    
-    <string name="battery_info">バッテリ情報</string>
-    <string name="level">残量</string>
-    <string name="health">健康度</string>
-    <string name="status">状態</string>
-    <string name="voltage">電圧</string>
-    <string name="temperature">温度</string>
-    <string name="technology">種類</string>
+    <string name="app_name">OrangeBox</string>
     
     <string name="Settings">設定</string>
     <string name="EnableNotification">通知を有効にする</string>
