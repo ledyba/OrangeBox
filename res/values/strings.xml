@@ -3,7 +3,7 @@
     <string name="app_name">OrangeBox</string>
     
     <string name="Settings">Settings</string>
-    <string name="EnableNotification">Enable notification</string>
+    <string name="EnableNotification">Enable sensor</string>
 
     <string name="Version">Ver</string>
     <string name="AppVersion">1.0</string>

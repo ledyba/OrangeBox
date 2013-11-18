@@ -4,7 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-import org.ledyba.meso.battery.SensorService;
+import org.ledyba.orangebox.watch.WatchService;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -37,7 +37,7 @@ public class MainActivity extends Activity {
 		setContentView(R.layout.activity_main);
 		master_ = new ConfigMaster(this);
 		if(master_.isNotificationEnabled()){
-			new SensorService().startResident(this);
+			new WatchService().startResident(this);
 		}
 		setStatus();
 		try {
@@ -79,10 +79,10 @@ public class MainActivity extends Activity {
 		final CheckBox box = (CheckBox) v;
 		if(!box.isChecked()){
 			master_.setNotificationEnabled(false);
-			SensorService.stopResidentIfActive(this);
+			WatchService.stopResidentIfActive(this);
 		}else{
 			master_.setNotificationEnabled(true);
-			new SensorService().startResident(this);
+			new WatchService().startResident(this);
 		}
 	}
 	

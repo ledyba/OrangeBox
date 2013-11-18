@@ -3,7 +3,7 @@
     <string name="app_name">OrangeBox</string>
     
     <string name="Settings">設定</string>
-    <string name="EnableNotification">通知を有効にする</string>
+    <string name="EnableNotification">センサを有効にする</string>
 
     <string name="Version">Ver</string>
     <string name="AppVersion">1.0</string>

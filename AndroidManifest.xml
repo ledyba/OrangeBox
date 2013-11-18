@@ -5,11 +5,14 @@
     android:versionName="1.0" >
 
     <uses-sdk
-        android:minSdkVersion="8"
+        android:minSdkVersion="9"
         android:targetSdkVersion="17" />
     
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="com.android.vending.BILLING" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_MOCK_LOCATION" />
 
     <application
         android:allowBackup="true"
@@ -27,9 +30,7 @@
             </intent-filter>
         </activity>
         <activity android:name="org.ledyba.orangebox.LicenseActivity" />
-        <activity android:name="org.ledyba.meso.donation.DonationActivity" />
-        
-        <service android:name="org.ledyba.meso.battery.SensorService" />
+        <service android:name="org.ledyba.orangebox.watch.WatchService" />
 
         <receiver android:name="org.ledyba.orangebox.BootReceiver" android:enabled="true" >
             <intent-filter>

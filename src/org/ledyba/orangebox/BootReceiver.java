@@ -1,6 +1,7 @@
 package org.ledyba.orangebox;
 
-import org.ledyba.meso.battery.SensorService;
+
+import org.ledyba.orangebox.watch.WatchService;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -21,7 +22,7 @@ public class BootReceiver extends BroadcastReceiver {
 		}
 	}
 	private void onBoot(Context context){
-		new SensorService().startResident(context);
+		new WatchService().startResident(context);
 	}
 
 }
