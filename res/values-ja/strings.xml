@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Meso</string>
+    
+    <string name="battery_info">バッテリ情報</string>
+    <string name="level">残量</string>
+    <string name="health">健康度</string>
+    <string name="status">状態</string>
+    <string name="voltage">電圧</string>
+    <string name="temperature">温度</string>
+    <string name="technology">種類</string>
+    
+    <string name="Settings">設定</string>
+    <string name="EnableNotification">通知を有効にする</string>
+
+    <string name="Version">Ver</string>
+    <string name="AppVersion">1.0</string>
+    
+    <string name="Author">作者</string>
+    <string name="PSI">ψ（プサイ）</string>
+    
+    <string name="URL">Web</string>
+    <string name="PSI_URL">http://ledyba.org/</string>
+    
+    
+    <string name="Support">サポート</string>
+    <string name="MakeDonation">寄付する</string>
+    <string name="ViewSource">ソース@github</string>
+    <string name="ViewLicense">ライセンスを見る</string>
+    
+    <string name="donation">寄付</string>
+    <string name="price">値段</string>
+    <string name="nowLoading">Now loading&#8230;</string>
+    <string name="notFound">見つかりませんでした</string>
+    <string name="Error">情報取得中にエラーが発生しました</string>
+    
+</resources>

@@ -1,0 +1,245 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".MainActivity" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="10sp"
+            android:layout_marginRight="10sp"
+            android:text="@string/battery_info"
+            android:textSize="32sp" />
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="10sp"
+            android:layout_marginRight="10sp"
+            android:stretchColumns="1,0" >
+
+            <TableRow>
+
+                <TextView
+                    android:text="@string/level"
+                    android:textSize="24sp" />
+
+                <TextView
+                    android:id="@+id/level"
+                    android:layout_marginLeft="10sp"
+                    android:textSize="24sp" />
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    android:text="@string/health"
+                    android:textSize="24sp" />
+
+                <TextView
+                    android:id="@+id/health"
+                    android:layout_marginLeft="10sp"
+                    android:textSize="24sp" />
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    android:text="@string/status"
+                    android:textSize="24sp" />
+
+                <TextView
+                    android:id="@+id/status"
+                    android:layout_marginLeft="10sp"
+                    android:textSize="24sp" />
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    android:text="@string/voltage"
+                    android:textSize="24sp" />
+
+                <TextView
+                    android:id="@+id/voltage"
+                    android:layout_marginLeft="10sp"
+                    android:textSize="24sp" />
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    android:text="@string/temperature"
+                    android:textSize="24sp" />
+
+                <TextView
+                    android:id="@+id/temperature"
+                    android:layout_marginLeft="10sp"
+                    android:textSize="24sp" />
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    android:text="@string/technology"
+                    android:textSize="24sp" />
+
+                <TextView
+                    android:id="@+id/technology"
+                    android:layout_marginLeft="10sp"
+                    android:textSize="24sp" />
+            </TableRow>
+        </TableLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="20sp"
+            android:layout_marginLeft="10sp"
+            android:layout_marginRight="10sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="10sp"
+            android:layout_marginRight="10sp"
+            android:text="@string/Settings"
+            android:textSize="32sp" />
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="10sp"
+            android:layout_marginRight="10sp"
+            android:stretchColumns="0" >
+
+            <TableRow>
+
+                <TextView
+                    android:text="@string/EnableNotification"
+                    android:textSize="24sp" />
+
+                <CheckBox
+                    android:id="@+id/notification_button"
+                    android:layout_marginLeft="10sp"
+                    android:onClick="onNotificationChanged"
+                    android:textSize="24sp" />
+            </TableRow>
+        </TableLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="10sp"
+            android:layout_marginRight="10sp"
+            android:text="@string/app_name"
+            android:textSize="32sp" />
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="10sp"
+            android:layout_marginRight="10sp"
+            android:stretchColumns="1" >
+
+            <TableRow>
+
+                <TextView
+                    android:text="@string/Version"
+                    android:textSize="24sp" />
+
+                <TextView
+                    android:id="@+id/appversion"
+                    android:layout_marginLeft="10sp"
+                    android:text="@string/AppVersion"
+                    android:textSize="24sp" />
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    android:text="@string/Author"
+                    android:textSize="24sp" />
+
+                <TextView
+                    android:layout_marginLeft="10sp"
+                    android:text="@string/PSI"
+                    android:textSize="24sp" />
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    android:text="@string/URL"
+                    android:textSize="24sp" />
+
+                <Button
+                    android:layout_marginLeft="10sp"
+                    android:onClick="onUrlClick"
+                    android:text="@string/PSI_URL"
+                    android:textSize="14sp" />
+            </TableRow>
+        </TableLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="10sp"
+            android:layout_marginRight="10sp"
+            android:text="@string/Support"
+            android:textSize="32sp" />
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="10sp"
+            android:layout_marginRight="10sp"
+            android:stretchColumns="0" >
+
+            <TableRow>
+
+                <Button
+                    android:layout_span="2"
+                    android:onClick="onMakeDonationButtonClick"
+                    android:text="@string/MakeDonation"
+                    android:textSize="24sp" />
+            </TableRow>
+
+            <TableRow>
+
+                <Button
+                    android:layout_span="2"
+                    android:onClick="onViewSourceClick"
+                    android:text="@string/ViewSource"
+                    android:textSize="24sp" />
+            </TableRow>
+
+            <TableRow>
+
+                <Button
+                    android:layout_span="2"
+                    android:onClick="onLicenseButtonClick"
+                    android:text="@string/ViewLicense"
+                    android:textSize="24sp" />
+            </TableRow>
+        </TableLayout>
+    </LinearLayout>
+
+</ScrollView>
