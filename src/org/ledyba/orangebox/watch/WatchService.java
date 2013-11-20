@@ -4,16 +4,22 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.ledyba.orangebox.MainActivity;
+
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
-import android.location.LocationManager;
 import android.os.Binder;
+import android.os.Handler;
 import android.os.IBinder;
 import android.os.Parcel;
 import android.os.RemoteException;
+import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
 public class WatchService extends Service {
@@ -102,12 +108,38 @@ public class WatchService extends Service {
 		locationWatcher = null;
 	}
 
-	List<SensorWatcher> watchers = new ArrayList<SensorWatcher>();
+	final Handler handler = new Handler();
+	final Runnable toForeground = new Runnable() {
+		@Override
+		public void run() {
+			final Intent notificationIntent = new Intent(WatchService.this, MainActivity.class);
+			final NotificationCompat.Builder builder =
+			new NotificationCompat.Builder(WatchService.this)
+			.setContentIntent( PendingIntent.getActivity(WatchService.this, 0, notificationIntent, PendingIntent.FLAG_CANCEL_CURRENT) )
+			.setAutoCancel(false)
+			.setSmallIcon( org.ledyba.orangebox.R.drawable.ic_launcher )
+			.setDefaults(0)
+			.setPriority(NotificationCompat.PRIORITY_MAX)
+			.setOngoing(true)
+			.setWhen(System.currentTimeMillis())
+			.setContentTitle( "Now sensoring..." )
+			.setContentText( watchers.size()+" sensors is working." );
+			final Notification notification = builder.build();
+			startForeground(0, notification);
+			manager.notify(0, notification);
+			handler.postDelayed(toForeground, 1000*60*10);
+		}
+	};
+
+	NotificationManager manager;
+	final List<SensorWatcher> watchers = new ArrayList<SensorWatcher>();
 	@Override
 	public void onCreate() {
 		super.onCreate();
 		this.startSensors();
 		this.startLocation();
+		manager = (NotificationManager) this.getSystemService(Context.NOTIFICATION_SERVICE);
+		handler.post(toForeground);
 	}
 
 	@Override
@@ -115,6 +147,8 @@ public class WatchService extends Service {
 		super.onDestroy();
 		this.stopSensors();
 		this.stopLocation();
+		Log.e(TAG, "Oh... why destroyed?");
+		startResident(this);
 	}
 
 	@Override
@@ -122,24 +156,18 @@ public class WatchService extends Service {
 		final String action = intent == null ? "(null)" : intent.getAction();
 		Log.d(TAG, "onStartCommand: "+action);
 		if(STOP_INTENT.equals(action)){
-			stopResident();
+			WatchService.stopResidentIfActive(this);
 		}
 		return super.onStartCommand(intent, flags, startId);
 	}
 
-	public WatchService startResident(Context context) {
+	public static void startResident(Context context) {
 		Log.d(TAG, "Service has been started from: " + context.toString());
-		Intent intent = new Intent(context, this.getClass());
+		Intent intent = new Intent(context, WatchService.class);
 		intent.putExtra("type", "start");
 		context.startService(intent);
-
-		return this;
 	}
 
-	public void stopResident() {
-		// サービス自体を停止
-		stopSelf();
-	}
 	private final static String STOP_INTENT = "org.ledyba.meso.StopService";
 	public static void stopResidentIfActive(Context context){
 		Intent it = new Intent(context, WatchService.class);

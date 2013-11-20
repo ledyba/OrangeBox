@@ -22,7 +22,7 @@ public class BootReceiver extends BroadcastReceiver {
 		}
 	}
 	private void onBoot(Context context){
-		new WatchService().startResident(context);
+		WatchService.startResident(context);
 	}
 
 }

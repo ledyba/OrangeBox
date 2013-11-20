@@ -7,9 +7,7 @@ import java.util.Iterator;
 import java.util.Locale;
 
 import android.content.Context;
-import android.location.Criteria;
 import android.location.GpsSatellite;
-import android.location.GpsStatus;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;

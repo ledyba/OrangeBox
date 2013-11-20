@@ -8,9 +8,7 @@ import org.ledyba.orangebox.watch.WatchService;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.content.BroadcastReceiver;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
@@ -37,7 +35,7 @@ public class MainActivity extends Activity {
 		setContentView(R.layout.activity_main);
 		master_ = new ConfigMaster(this);
 		if(master_.isNotificationEnabled()){
-			new WatchService().startResident(this);
+			WatchService.startResident(this);
 		}
 		setStatus();
 		try {
@@ -82,7 +80,7 @@ public class MainActivity extends Activity {
 			WatchService.stopResidentIfActive(this);
 		}else{
 			master_.setNotificationEnabled(true);
-			new WatchService().startResident(this);
+			WatchService.startResident(this);
 		}
 	}
 	
