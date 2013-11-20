@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.ledyba.orangebox.MainActivity;
 
+import android.R;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -125,8 +126,7 @@ public class WatchService extends Service {
 			.setContentTitle( "Now sensoring..." )
 			.setContentText( watchers.size()+" sensors is working." );
 			final Notification notification = builder.build();
-			startForeground(0, notification);
-			manager.notify(0, notification);
+			startForeground(1, notification);
 			handler.postDelayed(toForeground, 1000*60*10);
 		}
 	};
@@ -147,16 +147,24 @@ public class WatchService extends Service {
 		super.onDestroy();
 		this.stopSensors();
 		this.stopLocation();
-		Log.e(TAG, "Oh... why destroyed?");
-		startResident(this);
+		if(stopByUser){
+			Log.d(TAG, "destroyed by user.");
+		}else{
+			Log.e(TAG, "Oh... why destroyed?");
+			startResident(this);
+		}
 	}
+	
+	private boolean stopByUser = false;
 
 	@Override
 	public int onStartCommand(Intent intent, int flags, int startId) {
 		final String action = intent == null ? "(null)" : intent.getAction();
 		Log.d(TAG, "onStartCommand: "+action);
 		if(STOP_INTENT.equals(action)){
-			WatchService.stopResidentIfActive(this);
+			this.stopForeground(true);
+			stopByUser = true;
+			this.stopSelf();
 		}
 		return super.onStartCommand(intent, flags, startId);
 	}
