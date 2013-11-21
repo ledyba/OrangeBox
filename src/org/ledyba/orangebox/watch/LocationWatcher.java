@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.Locale;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import android.content.Context;
 import android.location.GpsSatellite;
@@ -15,14 +17,14 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
+import android.text.format.Time;
 import android.util.Log;
 
 class LocationWatcher extends AbstractWatcher implements LocationListener {
-	private LocationManager manager;
-	private boolean alive;
-	private final int TIME_SPAN=60*60*1000; //一時間
-	private final int TIME_SEARCH=5*60*1000; //5分
-	Handler handler = new Handler();
+	private final LocationManager manager;
+	private static final int TIME_SPAN=60*60*1000; //一時間
+	private static final int TIME_SEARCH=5*60*1000; //5分
+	private final Handler handler = new Handler();
 	static private final String TAG = "LocationWatcher";
 
 	public LocationWatcher(Context ctx) {
@@ -34,14 +36,13 @@ class LocationWatcher extends AbstractWatcher implements LocationListener {
 		super.start();
 		Log.d(TAG, "GPS require "+manager.getProvider(LocationManager.GPS_PROVIDER).getPowerRequirement()+" mA");
 		Log.d(TAG, "Network require "+manager.getProvider(LocationManager.NETWORK_PROVIDER).getPowerRequirement()+" mA");
-		alive = true;
 		startUpdate();
 	}
 
 	@Override
 	public void stop() {
-		alive = false;
 		stopUpdate();
+		killTimer();
 		super.stop();
 	}
 
@@ -51,31 +52,47 @@ class LocationWatcher extends AbstractWatcher implements LocationListener {
 		final String fname = String.format(Locale.JAPANESE, "%s_%d.txt", "GPS", new Date().getTime());
 		return base + File.separator + fname;
 	}
-	
+	private final Runnable stopTask = new Runnable() {
+		@Override
+		public void run() {
+			Log.d(TAG, "Location update stop!");
+			stopUpdate();
+		}
+	};
+	private final Runnable startTask = new Runnable() {
+		@Override
+		public void run() {
+			Log.d(TAG, "Location update start!");
+			if( timer != null ) {
+				stopUpdate();
+				manager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, LocationWatcher.this);
+				manager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, LocationWatcher.this);
+			}
+		}
+	};
+	private class LoopTask extends TimerTask {
+		@Override
+		public void run() {
+			Log.d(TAG, "Loop task invoked.");
+			handler.postDelayed(stopTask, TIME_SEARCH);
+			handler.post(startTask);
+		}
+		
+	}
+	private Timer timer;
 	public void startUpdate() {
 		stopUpdate();
-
-		manager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 10*1000, 100, this);
-		manager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 10*1000, 100, this);
-		Log.d(TAG, "Location update start!");
-		
-		handler.postDelayed(new Runnable() {
-			@Override
-			public void run() {
-				Log.d(TAG, "Location update stop!");
-				stopUpdate();
-			}
-		}, TIME_SEARCH);
-
-		handler.postDelayed(new Runnable() {
-			@Override
-			public void run() {
-				if(alive) {
-					Log.d(TAG, "refreshing!");
-					startUpdate();
-				}
-			}
-		}, TIME_SPAN);
+		killTimer();
+		this.timer = new Timer(true);
+		this.timer.scheduleAtFixedRate(new LoopTask(), 0, TIME_SPAN);
+	}
+	private void killTimer(){
+		if( timer != null ) {
+			timer.cancel();
+		}
+		timer = null;
+		handler.removeCallbacks(startTask);
+		handler.removeCallbacks(stopTask);
 	}
 	private void stopUpdate(){
 		try {
