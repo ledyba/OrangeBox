@@ -6,7 +6,6 @@ import java.util.List;
 
 import org.ledyba.orangebox.MainActivity;
 
-import android.R;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
