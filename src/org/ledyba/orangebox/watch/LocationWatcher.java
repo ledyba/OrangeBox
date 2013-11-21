@@ -8,6 +8,7 @@ import java.util.Locale;
 
 import android.content.Context;
 import android.location.GpsSatellite;
+import android.location.GpsStatus;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -19,6 +20,8 @@ import android.util.Log;
 class LocationWatcher extends AbstractWatcher implements LocationListener {
 	private LocationManager manager;
 	private boolean alive;
+	private final int TIME_SPAN=60*60*1000; //一時間
+	private final int TIME_SEARCH=5*60*1000; //5分
 	Handler handler = new Handler();
 	static private final String TAG = "LocationWatcher";
 
@@ -32,13 +35,13 @@ class LocationWatcher extends AbstractWatcher implements LocationListener {
 		Log.d(TAG, "GPS require "+manager.getProvider(LocationManager.GPS_PROVIDER).getPowerRequirement()+" mA");
 		Log.d(TAG, "Network require "+manager.getProvider(LocationManager.NETWORK_PROVIDER).getPowerRequirement()+" mA");
 		alive = true;
-		requestUpdate();
+		startUpdate();
 	}
 
 	@Override
 	public void stop() {
-		manager.removeUpdates(this);
 		alive = false;
+		stopUpdate();
 		super.stop();
 	}
 
@@ -49,41 +52,39 @@ class LocationWatcher extends AbstractWatcher implements LocationListener {
 		return base + File.separator + fname;
 	}
 	
-	public void requestUpdate() {
-		Iterator<GpsSatellite> it = manager.getGpsStatus(null).getSatellites().iterator();
-		boolean hasGps = false;
-		while( it.hasNext() ){
-			GpsSatellite sat = it.next();
-			Log.d(TAG, "Sat: "+sat.toString());
-			hasGps = true;
-		}
-		if(hasGps){
-			Log.d(TAG, "GPS registering...");
-			manager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 60*1000, 100, this);
-		}else{
-			Log.d(TAG, "GPS not registerd");
-		}
-		Log.d(TAG, "Network registering...");
-		manager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 60*1000, 100, this);
+	public void startUpdate() {
+		stopUpdate();
+
+		manager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 10*1000, 100, this);
+		manager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 10*1000, 100, this);
+		Log.d(TAG, "Location update start!");
 		
+		handler.postDelayed(new Runnable() {
+			@Override
+			public void run() {
+				Log.d(TAG, "Location update stop!");
+				stopUpdate();
+			}
+		}, TIME_SEARCH);
+
 		handler.postDelayed(new Runnable() {
 			@Override
 			public void run() {
 				if(alive) {
 					Log.d(TAG, "refreshing!");
-					manager.removeUpdates(LocationWatcher.this);
-					requestUpdate();
-				}else{
-					handler.removeCallbacks(this);
+					startUpdate();
 				}
 			}
-		}, 10*60*1000);
+		}, TIME_SPAN);
 	}
-	
-	public void reloadUpdate() {
-		
+	private void stopUpdate(){
+		try {
+			manager.removeUpdates(this);
+		} catch (Exception e){
+			Log.d(TAG, "Error while remove listener: ", e);
+		}
 	}
-	
+
 	private void recordLocation(final Location location){
 		if( out == null || location == null) {
 			return;
