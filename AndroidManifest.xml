@@ -30,6 +30,7 @@
             </intent-filter>
         </activity>
         <activity android:name="org.ledyba.orangebox.LicenseActivity" />
+        <activity android:name="org.ledyba.orangebox.donation.DonationActivity" />
         <service android:name="org.ledyba.orangebox.watch.WatchService" />
 
         <receiver android:name="org.ledyba.orangebox.BootReceiver" android:enabled="true" >

@@ -4,6 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+import org.ledyba.orangebox.donation.DonationActivity;
 import org.ledyba.orangebox.watch.WatchService;
 
 import android.annotation.SuppressLint;
@@ -89,9 +90,11 @@ public class MainActivity extends Activity {
 	}
 	
 	public void onMakeDonationButtonClick(final View v) {
-	} 
+		final Intent it = new Intent(this, DonationActivity.class);
+		startActivity(it);
+	}
 	public void onViewSourceClick(final View v){
-		startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/ledyba/Meso/")));
+		startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/ledyba/OrangeBox/")));
 	}
 	public void onLicenseButtonClick(final View v) {
 		final Intent it = new Intent(this, LicenseActivity.class);
