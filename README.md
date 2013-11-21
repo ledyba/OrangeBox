@@ -1,23 +1,13 @@
-Meso - Simple Battery Indicator
+OrangeBox
 =======
-AndroidÃ¼Ëö¤Î¥Ğ¥Ã¥Æ¥ê¡¼¤òNotification¤È¤·¤ÆÄÌÃÎ¤·¤Æ¤¯¤ì¤ë¥¢¥×¥ê¥±¡¼¥·¥ç¥ó¤Ç¤¹¡£
-
-ÉáÄÌ¤ÎÃ¼Ëö¤Ç¤Ï£±%Ã±°Ì¤Ç¤Ï»ÄÎÌ¤¬¤ï¤«¤ê¤Ş¤»¤ó¤¬¡¢¤³¤Î¥¢¥×¥ê¤ò»È¤¦¤ÈÊ¬¤«¤ê¤Ş¤¹¡£
-
-In app purchase¤â¼ÂÁõ¤·¡¢´óÉÕ¤ò¹Ô¤¦¤³¤È¤¬¤Ç¤­¤Ş¤¹¡£
-
-¼ÂÍÑ¤ËÂÑ¤¨¤ë¤È»×¤¤¤Ş¤¹¤¬¡¢³«È¯ÌÜÅª¼«ÂÎ¤Ï²İ¶âAPI¤Î¥Æ¥¹¥È¤Ç¤¹¡£
-
-Google play
-============
-https://play.google.com/store/apps/details?id=org.ledyba.meso&hl=ja
+OrangeBoxã¯Androidç«¯æœ«ã®ä½ç½®ã¨åŠ é€Ÿåº¦ã‚’ã²ãŸã™ã‚‰è¨˜éŒ²ã—ã¤ã¥ã‘ã€SDã‚«ãƒ¼ãƒ‰å†…ã®ãƒ†ã‚­ã‚¹ãƒˆãƒ•ã‚¡ã‚¤ãƒ«ã«æ›¸ãå‡ºã—ç¶šã‘ã‚‹ã‚½ãƒ•ãƒˆã‚¦ã‚§ã‚¢ã§ã™ã€‚
 
 License
 ========
-Meso is licensed under GPL v3.
+OrangeBox is licensed under GPL v3.
 
 Icon
 =======
-App icon is created by mentalrey, thanks. This icon is also licensed under GPL v3.
+App icon is created by Jeffrey Davidson, thanks. This icon is licensed under Creative Commons Attribution-Share Alike 3.0 Unported License.
 
-http://kde-look.org/content/show.php/Dark-Glass+reviewed?content=67902
+http://iconfreaks.com/search/icondetails/190448.html
