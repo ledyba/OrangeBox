@@ -32,7 +32,7 @@ class SensorWatcher extends AbstractWatcher implements SensorEventListener{
 	@Override
 	public void start() throws IOException{
 		super.start();
-		manager.registerListener(this, sensor, SensorManager.SENSOR_DELAY_UI);
+		manager.registerListener(this, sensor, SensorManager.SENSOR_DELAY_GAME);
 	}
 	
 	@Override

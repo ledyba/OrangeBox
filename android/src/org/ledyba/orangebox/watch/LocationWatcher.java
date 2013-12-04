@@ -18,8 +18,8 @@ import android.util.Log;
 
 class LocationWatcher extends AbstractWatcher implements LocationListener {
 	private final LocationManager manager;
-	private static final int TIME_SPAN=60*60*1000; //一時間
-	private static final int TIME_SEARCH=5*60*1000; //5分
+	private static final int TIME_SPAN=15*60*1000; //一時間
+	private static final int TIME_SEARCH=10*60*1000; //5分
 	private final Handler handler = new Handler();
 	static private final String TAG = "LocationWatcher";
 
