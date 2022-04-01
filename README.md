@@ -4,7 +4,7 @@ OrangeBoxはAndroid端末の位置と加速度をひたすら記録しつづけ�
 
 License
 ========
-OrangeBox is licensed under GPL v3.
+OrangeBox is licensed under AGPL v3.
 
 Icon
 =======
