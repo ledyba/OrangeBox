@@ -12,7 +12,7 @@ public class LicenseActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_license);
 		WebView wv = (WebView) findViewById(R.id.web_view);
-		wv.loadUrl("file:///android_asset/gpl.html");
+		wv.loadUrl("file:///android_asset/agpl.html");
 		wv.setVerticalScrollbarOverlay(true);
 		wv.setHorizontalScrollBarEnabled( false );
 	}
